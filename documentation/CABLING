@@ -1,0 +1,10 @@
+Stero soundcard is used for both ringtone (right speaker) as well as phone (left speaker).
+The initial setup is using a sound amplifier for the ringtone speaker that can be switched on/off using GPIO 23
+If no sound amplifier is used, alsa-mixer can be used to enable/disable the ringtone speaker during incoming calls
+and to disable the ringtone speaker during ongoing calls.
+
+GPIO	Wire-Pi	Direction	Usage
+27	2	in     		Dialing indication
+ 4	7       in		Phone hook
+17	0	in		Digit click indication
+23	4	out		Noice cancelation (speaker off)

@@ -1,0 +1,51 @@
+#env bash
+
+apt-get install git
+apt-get install wiringpi
+apt-get install lightdm
+apt-get install lxde
+apt-get install twinkle
+
+cat <<EOF > /etc/asound.conf
+pcm.!default {
+    type hw
+    card 1
+}
+
+ctl.!default {
+    type hw           
+    card 1
+}
+
+EOF
+
+#configure raspi-config to use VNC
+sudo cat <<EOF >> /root/.vnc/config.da/vncserver-x11
+Authentication=VncAuth
+Encryption=AlwaysOff
+Password=e0fd0472492935da
+EOF
+sudo vncpasswd
+#Login there.
+
+#requires X11 or via VNC, or via ssh X11 tunnel:
+twinkle
+#Configure your SIP account.
+#Including following options:
+# * Audio Hardware hw:1
+# * Disable validation of audio device (fails sometimes)
+# * hide in system try on start up
+#
+#Configure twinkle scripts as follows:
+# * Incoming call: fetapvoip/twinkle/callIncoming
+# * Incoming call answered fetapvoip/twinkle/callActive
+# * Incoming call failed: fetapvoip/twinkle/callInactive
+# * Outgoing call answered: fetapvoip/twinkle/callActive
+# * Outgoing call failed: fetapvoip/twinkle/callInactive
+# * Call release locally: fetapvoip/twinkle/callInactive
+# * Call released remotely: fetapvoip/twinkle/callInactive
+#
+#Configure Twinkle to start automatically on system boot.
+
+
+

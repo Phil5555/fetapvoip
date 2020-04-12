@@ -1,4 +1,5 @@
 LD_FLAGS=-l wiringPi
 
-main: main.o
+fetapvoip: fetapvoip.o
 	${CC} ${LD_FLAGS} -o $@ $< 
+
